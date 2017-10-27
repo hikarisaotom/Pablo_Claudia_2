@@ -413,6 +413,4 @@ public class Trabajo_Equipo {
              Cesta.add(Producto.get(Pos));
          }
      }
-     
-
 }
