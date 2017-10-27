@@ -1,4 +1,3 @@
-
 package trabajo_equipo.Clases;
 
 public class Tiendas extends Locales{
