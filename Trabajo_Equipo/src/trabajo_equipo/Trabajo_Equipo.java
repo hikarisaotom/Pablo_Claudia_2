@@ -205,8 +205,13 @@ public class Trabajo_Equipo {
         Id=GenerarCodigo();
         Calendar Fecha=GenerarFecha();
         EMP.setContraseña(Contra);
+<<<<<<< HEAD
+        EMP.setCorreo(Correo);
+        ((Personas)EMP).setFehanacimiento(Fecha);
+=======
         ((Personas)EMP).setCorreo(Correo);
         EMP.setFehanacimiento(Fecha);
+>>>>>>> 531a0ac73f71f3fc7a7fe83be342d0e5f18114b2
         EMP.setNombrecompleto(Nombre);
         EMP.setUsername(User);
         return EMP;
