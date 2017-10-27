@@ -2,12 +2,13 @@ package trabajo_equipo.Clases;
 
 import java.util.ArrayList;
 
-public class Clientes {
+public class Clientes extends Personas{
 
     ArrayList listaproductos = new ArrayList();
     double dinero;
 
     public Clientes() {
+        super();
     }
     
     

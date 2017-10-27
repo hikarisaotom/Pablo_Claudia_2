@@ -1,25 +1,41 @@
 
 package trabajo_equipo.Clases;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class Personas {
-    String username;
-    String contraseña;
-    String correo;
-    String Nombrecompleto;
-    Date fehanacimiento;
+    protected String username;
+    protected String contraseña;
+    protected String correo;
+    protected String Nombrecompleto;
+    protected Calendar fehanacimiento;
+    protected DateFormat Formato = new SimpleDateFormat("dd/mm/yy");
+    protected String ID;
 
     public Personas() {
+        
     }
 
-    public Personas(String username, String contraseña, String correo, String Nombrecompleto, Date fehanacimiento) {
+    public Personas(String username, String contraseña, String correo, String Nombrecompleto, Calendar fehanacimiento, String Id) {
         this.username = username;
         this.contraseña = contraseña;
         this.correo = correo;
         this.Nombrecompleto = Nombrecompleto;
         this.fehanacimiento = fehanacimiento;
+        this.ID=Id;
     }
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+    
 
     public String getUsername() {
         return username;
@@ -53,11 +69,11 @@ public class Personas {
         this.Nombrecompleto = Nombrecompleto;
     }
 
-    public Date getFehanacimiento() {
+    public Calendar getFehanacimiento() {
         return fehanacimiento;
     }
 
-    public void setFehanacimiento(Date fehanacimiento) {
+    public void setFehanacimiento(Calendar fehanacimiento) {
         this.fehanacimiento = fehanacimiento;
     }
     

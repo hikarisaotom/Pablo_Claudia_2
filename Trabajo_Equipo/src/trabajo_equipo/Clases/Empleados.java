@@ -1,10 +1,11 @@
 package trabajo_equipo.Clases;
 
-public class Empleados {
+public class Empleados extends Personas{
     String horario;
     int numerovendidos;
 
     public Empleados() {
+        super();
     }
 
     public Empleados(String horario, int numerovendidos) {
