@@ -1,8 +1,11 @@
 
 package trabajo_equipo.Clases;
 
+import java.util.ArrayList;
+
 public class Locales_Comida extends Locales {
     private Productos Producto_Dia;
+    ArrayList ListaEmpleados<Empleados>=new ArrayList();
 
     public Locales_Comida() {
         super();

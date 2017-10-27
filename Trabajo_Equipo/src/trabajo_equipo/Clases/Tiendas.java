@@ -1,4 +1,3 @@
-
 package trabajo_equipo.Clases;
 
 public class Tiendas extends Locales{
@@ -17,7 +16,7 @@ public class Tiendas extends Locales{
     }
 
     public void setTamano(int Tamano) {
-        if (Tamano<=18) {
+        if (Tamano<=18 && Tamano>0) {
              this.Tamano = Tamano;
         }
     }
