@@ -158,7 +158,7 @@ public class Trabajo_Equipo {
         Calendar Fecha=GenerarFecha();
         EMP.setContraseña(Contra);
         EMP.setCorreo(Correo);
-        EMP.setFehanacimiento(Fecha);
+        ((Personas)EMP).setFehanacimiento(Fecha);
         EMP.setNombrecompleto(Nombre);
         EMP.setUsername(User);
         
