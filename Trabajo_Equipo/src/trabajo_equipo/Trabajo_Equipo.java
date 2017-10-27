@@ -10,10 +10,14 @@ import trabajo_equipo.Clases.*;
 public class Trabajo_Equipo {
    public static Random Ran = new Random();
     public static ArrayList<Personas> Usuario = new ArrayList();
-    public static ArrayList<Tiendas> Tienda = new ArrayList();
+    public static ArrayList<Empleados> Empleado = new ArrayList();
+    public static ArrayList<Locales> Tienda = new ArrayList();
     public static ArrayList<Productos> Producto = new ArrayList();
     public static ArrayList<String> Codigos = new ArrayList();
       public static ArrayList<String> nicks = new ArrayList();
+      public static String Socio="Claudia";
+      public static String ContraSocio="123456";
+      
     public static void main(String[] args) {
         String Opcion = "";
         while (Opcion != "Salir") {
@@ -34,7 +38,7 @@ public class Trabajo_Equipo {
                         JOptionPane.showMessageDialog(null,"Error en los datos");
                     }
                     break;
-                case "Log in Empleados":
+                case "Log in socio":
                     if (LoginEmpleado(Usuario)) {
                         MenuEmpleado();
                    }else{
@@ -50,7 +54,7 @@ public class Trabajo_Equipo {
     
     public static void  CrearUsuario(){
         String Opcion;
-                    String[] Opciones = {"Cliente", "Empleado"};
+                    String[] Opciones = {"Cliente"};
 
          Opcion = (String) JOptionPane.showInputDialog(null,
                     "Seleccione una opción", //Mensaje
@@ -63,9 +67,9 @@ public class Trabajo_Equipo {
             case "Cliente":
                 Usuario.add(CrearCliente());
                 break;
-            case "Empleado":
-               Usuario.add(CrearEmpleado());
-                break;
+          /*  case "Empleado":
+              
+                break;*/
         }
     }
     public static Clientes CrearCliente() {
@@ -92,10 +96,62 @@ public class Trabajo_Equipo {
         Cli.setDinero(Dinero);
         Cli.setNombrecompleto(Nombre);
         Cli.setUsername(User);
+       
         
         return Cli;
     }
+    public static void CrearProducto(){
+        
+        double precio= Double.parseDouble(JOptionPane.showInputDialog("Ingrese el precio del producto:"));
+        
+        
+    }
+    public static void AgregarEmpleados(){
+        int Pos=Integer.parseInt(JOptionPane.showInputDialog("Lista de tiendas disponibles hasta el momento: \n"+Imprimir()));
+     if(Tienda.get(Pos).getEmple().size()==4&&Tienda.get(Pos) instanceof Locales_Comida){
+         JOptionPane.showMessageDialog(null,"Numero maximo de empleados encontrado");
+     }else{
+          int Pos2=Integer.parseInt(JOptionPane.showInputDialog("Ingrese el empleado a agregar: \n"+ImprimirE()));
+      Tienda.get(Pos).setEmple(Empleado.get(Pos2));
+     }
 
+    }
+    
+    public static void CrearLocal(){
+    Tiendas T= new Tiendas();
+    quioscos Q= new quioscos();
+    Locales_Comida LC= new Locales_Comida();
+    Locales L= new Locales();
+        String Nombre="";
+        int Piso=-2;
+        Nombre=JOptionPane.showInputDialog("el Nombre de la cliente");
+        String Opcion="";
+         String[] Opciones = {"Tienda", "Quiosco", "Local Comida"};
+            Opcion = (String) JOptionPane.showInputDialog(null,
+                    "Tipo de tienda que desea crear", //Mensaje
+                    "                                  Tipo_Tienda",//TITULO
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    Opciones,
+                    Opciones[0]);
+            switch (Opcion){
+                case "Tienda":
+                 T.setNombre(Nombre);
+                 T.setNum_Piso(Piso);
+                 Tienda.add(T);
+                    break;
+                case "Quiosco":
+                   Q.setNombre(Nombre);
+                   Q.setNum_Piso(Piso);
+                   Tienda.add(Q);
+                    break;
+                case "Local Comida":
+                      Q.setNombre(Nombre);
+                   Q.setNum_Piso(Piso);
+                   Tienda.add(Q);
+                    break;
+            }
+    }
      public static Calendar GenerarFecha(){
         Calendar Calendario = new GregorianCalendar(Ran.nextInt(10)+2018,0,Ran.nextInt(20));
         return Calendario;
@@ -153,18 +209,41 @@ public class Trabajo_Equipo {
         EMP.setFehanacimiento(Fecha);
         EMP.setNombrecompleto(Nombre);
         EMP.setUsername(User);
-        
         return EMP;
-       
     }
- 
-
     public static void Menucliente() {
-        JOptionPane.showInputDialog("Tiendas disponibles"+Imprimir()+"\n");
-
+        int pos=Integer.parseInt(JOptionPane.showInputDialog("Tiendas disponibles"+Imprimir()+"\n Ingrese a cual desea Entrar.\n"));
+   
     }
 
     public static void MenuEmpleado() {
+        String Opcion="";
+         String[] Opciones = {"Crear Tienda", "Agregar Empleados a las tienda", "Agregar Productos a la tienda","Modificar"};
+            Opcion = (String) JOptionPane.showInputDialog(null,
+                    "Tipo de tienda que desea crear", //Mensaje
+                    "                                  Tipo_Tienda",//TITULO
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    Opciones,
+                    Opciones[0]);
+        switch (Opcion) {
+            case "Crear Tienda":
+                 CrearLocal();
+                break;
+                  case "Agregar Empleados a las tienda":
+                      AgregarEmpleados();
+                break;
+                  case "Agregar Productos a la tienda":
+                      CrearProducto();
+                break;
+                  case "Modificar":
+                        Empleado.add(CrearEmpleado());
+                      break;
+        }
+               
+                
+               
+        
 
     }
 
@@ -207,9 +286,24 @@ public class Trabajo_Equipo {
         }
         return S;
     }
+     public static String ImprimirE(){
+        String S="";
+        for (int i = 0; i <Empleado.size(); i++) {
+            S+=i+")"+Empleado.get(i);
+        }
+        return S;
+    }
+     public static String ImprimirP(){
+          String S="";
+        for (int i = 0; i <Producto.size(); i++) {
+            S+=i+")"+Producto.get(i);
+        }
+        return S;
+     }
 
     public static void MenuClientes() {
 
     }
+    
 
 }

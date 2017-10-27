@@ -4,17 +4,34 @@ import java.util.ArrayList;
 
 public class Locales {
 
-    public class Tiendas {
 
         protected String Nombre;
         protected int Num_Piso;
-        //protected ArrayList<Productos> = new ArrayList();
-        protected String Empleado;
+        protected ArrayList<Productos> Produc = new ArrayList();
+         protected ArrayList<Empleados> Emple = new ArrayList();
+        protected Empleados Empleado;
+        
 
-        public Tiendas() {
+        public Locales() {
         }
 
-        public Tiendas(String Nombre, int Num_Piso, String Empleado) {
+    public ArrayList<Productos> getProduc() {
+        return Produc;
+    }
+
+    public void setProduc(ArrayList<Productos> Produc) {
+        this.Produc = Produc;
+    }
+
+    public ArrayList<Empleados> getEmple() {
+        return Emple;
+    }
+
+    public void setEmple(Empleados Emple) {
+        
+    }
+
+        public Locales(String Nombre, int Num_Piso, Empleados Empleado) {
             this.Nombre = Nombre;
             this.Num_Piso = Num_Piso;
             this.Empleado = Empleado;
@@ -36,17 +53,19 @@ public class Locales {
             this.Num_Piso = Num_Piso;
         }
 
-        public String getEmpleado() {
+        public Empleados getEmpleado() {
             return Empleado;
         }
 
-        public void setEmpleado(String Empleado) {
+        public void setEmpleado(Empleados Empleado) {
             this.Empleado = Empleado;
         }
 
-        @Override
-        public String toString() {
-            return "Tiendas{" + "Nombre=" + Nombre + ", Num_Piso=" + Num_Piso + ", Empleado=" + Empleado + '}';
-        }
+    @Override
+    public String toString() {
+        return "Locales{" + "Nombre=" + Nombre + ", Num_Piso=" + Num_Piso + ", Produc=" + Produc + ", Emple=" + Emple + ", Empleado=" + Empleado + '}';
     }
-}
+
+       
+    }
+
