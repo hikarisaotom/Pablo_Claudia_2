@@ -32,6 +32,11 @@ public class Clientes extends Personas{
     public void setDinero(double dinero) {
         this.dinero = dinero;
     }
+
+    @Override
+    public String toString() {
+        return super.toString()+"Clientes{" + "listaproductos=" + listaproductos + ", dinero=" + dinero + '}';
+    }
     
     
 

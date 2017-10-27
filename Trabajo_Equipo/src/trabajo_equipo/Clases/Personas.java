@@ -76,6 +76,11 @@ public class Personas {
     public void setFehanacimiento(Calendar fehanacimiento) {
         this.fehanacimiento = fehanacimiento;
     }
+
+    @Override
+    public String toString() {
+        return "Personas{" + "username=" + username + ", contrase\u00f1a=" + contraseña + ", correo=" + correo + ", Nombrecompleto=" + Nombrecompleto + ", fehanacimiento=" + fehanacimiento + ", Formato=" + Formato + ", ID=" + ID + '}';
+    }
     
     
     

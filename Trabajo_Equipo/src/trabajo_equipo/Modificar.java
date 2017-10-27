@@ -9,7 +9,7 @@ public class Modificar {
         String Username;
         posicion=Integer.parseInt(JOptionPane.showInputDialog(""+"Posicion a modificar: "));
         Username=JOptionPane.showInputDialog(""+"Nuevo Username: ");
-                (().get(p)).setAncho(a);
+             
         
     } 
     

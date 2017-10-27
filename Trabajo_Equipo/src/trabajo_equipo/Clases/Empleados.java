@@ -29,5 +29,4 @@ public class Empleados extends Personas{
         this.numerovendidos = numerovendidos;
     }
     
-    
 }
