@@ -1,14 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package trabajo_equipo.Clases;
 
-/**
- *
- * @author Claudia Cortes
- */
-public class Locales_Comida {
+public class Locales_Comida extends Locales {
+    private Productos Producto_Dia;
+
+    public Locales_Comida() {
+        super();
+    }
+
+    public Locales_Comida(Productos Producto_Dia) {
+        this.Producto_Dia = Producto_Dia;
+    }
+
+    public Productos getProducto_Dia() {
+        return Producto_Dia;
+    }
+
+    public void setProducto_Dia(Productos Producto_Dia) {
+        this.Producto_Dia = Producto_Dia;
+    }
+
+    
+    
     
 }
