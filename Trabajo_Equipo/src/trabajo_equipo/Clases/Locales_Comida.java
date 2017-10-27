@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Locales_Comida extends Locales {
     private Productos Producto_Dia;
-    ArrayList ListaEmpleados<Empleados>=new ArrayList();
+    private ArrayList<Empleados> ListaEmpleados=new ArrayList();
 
     public Locales_Comida() {
         super();

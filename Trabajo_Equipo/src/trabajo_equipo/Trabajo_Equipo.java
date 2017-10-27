@@ -13,6 +13,7 @@ public class Trabajo_Equipo {
     public static ArrayList<Tiendas> Tienda = new ArrayList();
     public static ArrayList<Productos> Producto = new ArrayList();
     public static ArrayList<String> Codigos = new ArrayList();
+      public static ArrayList<String> nicks = new ArrayList();
     public static void main(String[] args) {
         String Opcion = "";
         while (Opcion != "Salir") {
@@ -25,14 +26,15 @@ public class Trabajo_Equipo {
                     Opciones,
                     Opciones[0]);
             switch (Opcion) {
-                case "Cliente":
+             
+                case "Log in Cliente":
                     if (LoginCliente(Usuario)) {
                         Menucliente();
                     }else{
                         JOptionPane.showMessageDialog(null,"Error en los datos");
                     }
                     break;
-                case "Empleados":
+                case "Log in Empleados":
                     if (LoginEmpleado(Usuario)) {
                         MenuEmpleado();
                    }else{
@@ -59,7 +61,7 @@ public class Trabajo_Equipo {
                     Opciones[0]);
          switch (Opcion) {
             case "Cliente":
-                
+                Usuario.add(CrearCliente());
                 break;
             case "Empleado":
                Usuario.add(CrearEmpleado());
@@ -74,26 +76,22 @@ public class Trabajo_Equipo {
         String Correo="";
         String Id="";
         String Nombre="";
-        while (true) {
-            if (Bandera) {
-                break;
-            }
-            User = JOptionPane.showInputDialog("Ingrese su User Name");
-            for (int i = 0; i < Usuario.size(); i++) {
-                if (User.equals(Usuario.get(i).getUsername())) {
-                    Bandera = true;
-                }
-            }
+         User = JOptionPane.showInputDialog("Ingrese su UserName");  
+        while (nicks.contains(User)) {
+            User = JOptionPane.showInputDialog("Ingrese su User Name");  
         }
+        nicks.add(User);
         Contra = JOptionPane.showInputDialog("Ingrese su Contraseña");
         Correo=JOptionPane.showInputDialog("Ingrese su Correo");
-        Nombre=JOptionPane.showInputDialog("Ingrese su Nombre");
+        Nombre=JOptionPane.showInputDialog("Ingrese su Nombre Completo");
         double Dinero=Double.parseDouble(JOptionPane.showInputDialog("Ingrese la cantidad de dinero que tiene disponible"));
         Id=GenerarCodigo();
         Calendar Fecha=GenerarFecha();
         Cli.setCorreo(Correo);
         Cli.setContraseña(Contra);
         Cli.setDinero(Dinero);
+        Cli.setNombrecompleto(Nombre);
+        Cli.setUsername(User);
         
         return Cli;
     }
@@ -139,17 +137,11 @@ public class Trabajo_Equipo {
         String Correo="";
         String Id="";
         String Nombre="";
-        while (true) {
-            if (Bandera) {
-                break;
-            }
-            User = JOptionPane.showInputDialog("Ingrese su User Name");
-            for (int i = 0; i < Usuario.size(); i++) {
-                if (User.equals(Usuario.get(i).getUsername())) {
-                    Bandera = true;
-                }
-            }
+       User = JOptionPane.showInputDialog("Ingrese su UserName");  
+        while (nicks.contains(User)) {
+            User = JOptionPane.showInputDialog("Ingrese su User Name");  
         }
+        nicks.add(User);
         Contra = JOptionPane.showInputDialog("Ingrese su Contraseña");
         Correo=JOptionPane.showInputDialog("Ingrese su Correo");
         Nombre=JOptionPane.showInputDialog("Ingrese su Nombre");
@@ -157,8 +149,13 @@ public class Trabajo_Equipo {
         Id=GenerarCodigo();
         Calendar Fecha=GenerarFecha();
         EMP.setContraseña(Contra);
+<<<<<<< HEAD
         EMP.setCorreo(Correo);
         ((Personas)EMP).setFehanacimiento(Fecha);
+=======
+        ((Personas)EMP).setCorreo(Correo);
+        EMP.setFehanacimiento(Fecha);
+>>>>>>> 531a0ac73f71f3fc7a7fe83be342d0e5f18114b2
         EMP.setNombrecompleto(Nombre);
         EMP.setUsername(User);
         
@@ -168,6 +165,7 @@ public class Trabajo_Equipo {
  
 
     public static void Menucliente() {
+        JOptionPane.showInputDialog("Tiendas disponibles"+Imprimir()+"\n");
 
     }
 
@@ -176,12 +174,14 @@ public class Trabajo_Equipo {
     }
 
     public static boolean LoginCliente(ArrayList Personas) {
+        System.out.println(Usuario);
         String Usuario = JOptionPane.showInputDialog("Ingrese su usuario.");
         String Contra = JOptionPane.showInputDialog("Ingrese su Contra.");
         boolean Acceso = false;
         for (int i = 0; i < Personas.size(); i++) {
-            if (Personas.get(i) instanceof Clientes) {
-                if (Usuario == ((Personas) Personas.get(i)).getUsername() && Contra == ((Personas) Personas.get(i)).getContraseña()) {
+           if (Personas.get(i) instanceof Clientes) {
+                if (Usuario.equals( ((Personas) Personas.get(i)).getUsername()) && Contra.equals(((Personas) Personas.get(i)).getContraseña())) {
+                    System.out.println("ENCPNTROP COINCIDENCIA");
                     Acceso = true;
                 }
             }
@@ -195,13 +195,22 @@ public class Trabajo_Equipo {
         String Contra = JOptionPane.showInputDialog("Ingrese su Contra.");
         boolean Acceso = false;
         for (int i = 0; i < Personas.size(); i++) {
-            if (Personas.get(i) instanceof Empleados) {
-                if (Usuario == ((Personas) Personas.get(i)).getUsername() && Contra == ((Personas) Personas.get(i)).getContraseña()) {
+           if (Personas.get(i) instanceof Empleados) {
+                if (Usuario.equals( ((Personas) Personas.get(i)).getUsername()) && Contra.equals(((Personas) Personas.get(i)).getContraseña())) {
+                    System.out.println("ENCPNTROP COINCIDENCIA");
                     Acceso = true;
                 }
             }
         }
         return Acceso;
+    }
+    
+    public static String Imprimir(){
+        String S="";
+        for (int i = 0; i <Tienda.size(); i++) {
+            S+=i+")"+Tienda.get(i);
+        }
+        return S;
     }
 
     public static void MenuClientes() {
