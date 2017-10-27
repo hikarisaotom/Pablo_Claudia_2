@@ -149,13 +149,8 @@ public class Trabajo_Equipo {
         Id=GenerarCodigo();
         Calendar Fecha=GenerarFecha();
         EMP.setContraseña(Contra);
-<<<<<<< HEAD
-        EMP.setCorreo(Correo);
-        ((Personas)EMP).setFehanacimiento(Fecha);
-=======
-        ((Personas)EMP).setCorreo(Correo);
+        ((Personas)EMP).setCorreo(Correo);        
         EMP.setFehanacimiento(Fecha);
->>>>>>> 531a0ac73f71f3fc7a7fe83be342d0e5f18114b2
         EMP.setNombrecompleto(Nombre);
         EMP.setUsername(User);
         
@@ -214,7 +209,158 @@ public class Trabajo_Equipo {
     }
 
     public static void MenuClientes() {
-
+J
     }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    public static void modificarPersona(){   
+        
+        String Opcion="";
+        String Opcion2="";
+        
+        String[] OpcionesM = {"Modificar Cliente", "Modificar Empleado", "Salir"};
+        
+        Opcion = (String) JOptionPane.showInputDialog(null,
+                    "Seleccione una opción", //Mensaje
+                    "                                  MENU",//TITULO
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    OpcionesM,
+                    OpcionesM[0]);
+        
+        switch(Opcion){
+            case "Modificar Cliente":
+                String[] OpcionesMC = {"Modificar Usuario", "Modificar Contraseña", 
+                    "Modificar Correo","Moficicar ID","Modificar Nombre"};
+                Opcion2= (String) JOptionPane.showInputDialog(null,
+                    "Seleccione una opción", //Mensaje
+                    "                                  MENU",//TITULO
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    OpcionesMC,
+                    OpcionesMC[0]);
+                        
+                       switch(Opcion2){
+                           case "Modificar Usuario":
+                               int posicion;
+                             String Username;
+                                 posicion=Integer.parseInt(JOptionPane.showInputDialog(""+"Cliente a modificar: "));
+                                 Username=JOptionPane.showInputDialog(""+"Nuevo Username: ");
+                                 ((Clientes)Usuario.get(posicion)).setUsername(Username);
+                               break;
+                       }
+                        
+                break;
+            case "Modificar Empleado":
+                break;
+        }
+        
+      /* int posicion;
+        String Username;
+        posicion=Integer.parseInt(JOptionPane.showInputDialog(""+"Posicion a modificar: "));
+        Username=JOptionPane.showInputDialog(""+"Nuevo Username: ");
+        ((Usuario).get(p)).setAncho(a);*/
 }
+    
+    
+    
+    
+    
+}
+
