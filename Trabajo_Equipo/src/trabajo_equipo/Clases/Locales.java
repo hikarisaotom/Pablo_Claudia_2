@@ -1,49 +1,52 @@
-
 package trabajo_equipo.Clases;
 
+import java.util.ArrayList;
+
 public class Locales {
+
     public class Tiendas {
-   protected String Nombre;
-    protected int Num_Piso;
-   //protected ArrayList<productos> = new ArrayList();
-    protected String Empleado;
 
-    public Tiendas() {
-    }
+        protected String Nombre;
+        protected int Num_Piso;
+        //protected ArrayList<Productos> = new ArrayList();
+        protected String Empleado;
 
-    public Tiendas(String Nombre, int Num_Piso, String Empleado) {
-        this.Nombre = Nombre;
-        this.Num_Piso = Num_Piso;
-        this.Empleado = Empleado;
-    }
+        public Tiendas() {
+        }
 
-    public String getNombre() {
-        return Nombre;
-    }
+        public Tiendas(String Nombre, int Num_Piso, String Empleado) {
+            this.Nombre = Nombre;
+            this.Num_Piso = Num_Piso;
+            this.Empleado = Empleado;
+        }
 
-    public void setNombre(String Nombre) {
-        this.Nombre = Nombre;
-    }
+        public String getNombre() {
+            return Nombre;
+        }
 
-    public int getNum_Piso() {
-        return Num_Piso;
-    }
+        public void setNombre(String Nombre) {
+            this.Nombre = Nombre;
+        }
 
-    public void setNum_Piso(int Num_Piso) {
-        this.Num_Piso = Num_Piso;
-    }
+        public int getNum_Piso() {
+            return Num_Piso;
+        }
 
-    public String getEmpleado() {
-        return Empleado;
-    }
+        public void setNum_Piso(int Num_Piso) {
+            this.Num_Piso = Num_Piso;
+        }
 
-    public void setEmpleado(String Empleado) {
-        this.Empleado = Empleado;
-    }
+        public String getEmpleado() {
+            return Empleado;
+        }
 
-    @Override
-    public String toString() {
-        return "Tiendas{" + "Nombre=" + Nombre + ", Num_Piso=" + Num_Piso + ", Empleado=" + Empleado + '}';
-    }
+        public void setEmpleado(String Empleado) {
+            this.Empleado = Empleado;
+        }
+
+        @Override
+        public String toString() {
+            return "Tiendas{" + "Nombre=" + Nombre + ", Num_Piso=" + Num_Piso + ", Empleado=" + Empleado + '}';
+        }
     }
 }

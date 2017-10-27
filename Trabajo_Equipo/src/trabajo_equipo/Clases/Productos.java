@@ -1,11 +1,15 @@
 package trabajo_equipo.Clases;
 
+import java.util.ArrayList;
+
 public class Productos {
 
     double precio;
     String descripcion;
     String marca;
     int descuento;
+    ArrayList Productos=new ArrayList();
+    
 
     public Productos() {
     }
@@ -49,5 +53,7 @@ public class Productos {
         this.descuento = descuento;
     }
     
+
+
     
 }
