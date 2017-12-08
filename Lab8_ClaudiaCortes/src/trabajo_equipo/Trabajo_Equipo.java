@@ -20,11 +20,17 @@ public class Trabajo_Equipo {
     public static String ContraSocio = "123";
     public static int PosicionU = -9;
     public static ArrayList<String> nombre_Tiendas = new ArrayList();
+    public static Clientes Cliente_Actual;
+    public static Empleados Empleado_Actual;
+    public static Locales Tienda_Actual;
+    public static Productos Producto_Actual;
+     
+    
 
     public static void main(String[] args) {
         String Opcion = "";
         while (Opcion != "Salir") {
-            String[] Opciones = {"Crear Usuario", "Log in Cliente", "Log in socio", "Salir"};
+            String[] Opciones = {"Crear Usuario", "Log in Cliente", "Log in socio","Salir"};
             try {
                 Opcion = (String) JOptionPane.showInputDialog(null,
                         "Seleccione una opción", //Mensaje
@@ -334,7 +340,6 @@ public class Trabajo_Equipo {
     }
 
     public static Empleados CrearEmpleado() {
-
         Empleados EMP = new Empleados();
         boolean Bandera = false;
         String User = "";
@@ -359,6 +364,7 @@ public class Trabajo_Equipo {
         EMP.setNombrecompleto(Nombre);
         EMP.setUsername(User);
         return EMP;
+        
     }
 
     public static void Menucliente() {
@@ -368,8 +374,7 @@ public class Trabajo_Equipo {
 
     public static void MenuEmpleado() {
         String Opcion = "";
-        String[] Opciones = {"Crear Tienda", "Agregar Empleados a las tienda", "Agregar Productos a la tienda", "Modificar"};
-        String[] Opciones2 = {"Personas", "Tiendas", "Productos"};
+        String[] Opciones = {"Crear Tienda", "Agregar Empleados a tiendas", "Agregar Productos a la tienda", "Modificar","Eliminar"};
         Opcion = (String) JOptionPane.showInputDialog(null,
                 "Bienvenido al Menu principal: Socio", //Mensaje
                 "                                  Menu principal",//TITULO
@@ -378,38 +383,162 @@ public class Trabajo_Equipo {
                 Opciones,
                 Opciones[0]);
         switch (Opcion) {
+            case "Eliminar":
+                Eliminar();
+                break;
             case "Crear Tienda":
                 CrearLocal();
                 break;
-            case "Agregar Empleados a las tienda":
+            case "Agregar Empleados a tiendas":
                 Empleado.add(CrearEmpleado());
                 break;
             case "Agregar Productos a la tienda":
                 CrearProducto();
                 break;
             case "Modificar":
-
+            Modificar();
+                break;
+        }
+    }
+    
+    public static void Modificar() {
+        String Opcion = "";
+        String[] Opciones2 = {"Empleados", "Tiendas", "Productos"};
+        int Bandera = 0;
+        while (Bandera == 0) {
+            try {
                 Opcion = (String) JOptionPane.showInputDialog(null,
-                        "Valor que desea modificar", //Mensaje
+                        "Seleeccione que desea Modificar", //Mensaje
                         "                                  Modificar",//TITULO
                         JOptionPane.QUESTION_MESSAGE,
                         null,
                         Opciones2,
                         Opciones2[0]);
-                switch (Opcion) {
-                    case "Personas":
-                        modificarPersona();
-                        break;
-                    case "Tiendas":
-                        break;
-                    case "Productos":
-                        break;
-
+                if (Opcion == null) {
+                    Bandera = 0;
+                } else {
+                    Bandera = 6;
                 }
+            } catch (Exception e) {
+
+            }
+        }
+       
+        switch (Opcion) {
+            case "Empleados":
+                modificarPersona();
+                break;
+            case "Tiendas":
+                ModificarTiendas();
+                break;
+            case "Productos":
+                ModificarProductos();
+                break;
+
+        }
+    }
+        public static void modificarPersona() {
+
+        String Opcion = "";
+        String Opcion2 = "";
+
+        String[] OpcionesM = {"Modificar Cliente", "Modificar Empleado", "Salir"};
+
+        Opcion = (String) JOptionPane.showInputDialog(null,
+                "Seleccione una opción", //Mensaje
+                "                                  MENU",//TITULO
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                OpcionesM,
+                OpcionesM[0]);
+
+        switch (Opcion) {
+            case "Modificar Cliente":
+                String[] OpcionesMC = {"Modificar Usuario", "Modificar Contraseña",
+                    "Modificar Correo", "Moficicar ID", "Modificar Nombre"};
+                Opcion2 = (String) JOptionPane.showInputDialog(null,
+                        "Seleccione una opción", //Mensaje
+                        "                                  MENU",//TITULO
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        OpcionesMC,
+                        OpcionesMC[0]);
+
+                switch (Opcion2) {
+                    case "Modificar Usuario":
+                        int posicion;
+                        String Username;
+                        posicion = Integer.parseInt(JOptionPane.showInputDialog("" + "Cliente a modificar: "));
+                        Username = JOptionPane.showInputDialog("" + "Nuevo Username: ");
+                        ((Clientes) Usuario.get(posicion)).setUsername(Username);
+                        break;
+                }
+
+                break;
+            case "Modificar Empleado":
                 break;
         }
     }
 
+    public static void ModificarTiendas(){
+        
+    }
+    public static void  ModificarProductos(){
+        
+    }
+    
+    public static void Eliminar() {
+        String[] Opciones2 = {"Empleados", "Tiendas", "Productos"};
+        int Num = 0;
+        String Opcion ="";
+        while (Num == 0) {
+             Opcion = (String) JOptionPane.showInputDialog(null,
+                    "Seleeccione la opcion que desea Eliminar", //Mensaje
+                    "                                  ELIMINAR",//TITULO
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    Opciones2,
+                    Opciones2[0]);
+            if (Opcion == null) {
+                continue;
+            } else {
+                Num = 6;
+            }
+        }
+         String Lista;
+         ArrayList Lista_Eliminar=null;
+        switch (Opcion) {
+            case "Empleados":
+               Lista =ImprimirE();
+               Lista_Eliminar=Empleado;
+                break;
+            case "Tiendas":
+                Lista=Imprimir();
+                Lista_Eliminar=Tienda;
+                break;
+            case "Productos":
+                Lista=ImprimirP() ;
+                Lista_Eliminar=Producto;
+                break;
+        }
+        int POS=0;
+        while(POS<0||POS>Lista_Eliminar.size()-1){
+            try{
+                POS= Integer.parseInt(JOptionPane.showInputDialog(null,"Ingrese la posicion del elemento e liminar"));
+                if (POS>Lista_Eliminar.size()-1) {
+                    JOptionPane.showMessageDialog(null,"Numero fuera de rango");
+                    POS=-9;
+                }else{
+                    Lista_Eliminar.remove(POS);
+                    JOptionPane.showMessageDialog(null,"Elemento Eliminado Exitosamente.");
+                    System.out.println("LA NUEVA LISTA DE LOS ELEMENTOS");
+                    System.out.println(Lista_Eliminar);
+                }
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null,"Dato Invalido");
+            }
+        }
+    }
     public static boolean LoginCliente(ArrayList Personas) {
         System.out.println(Usuario);
         String Usuario = JOptionPane.showInputDialog("Ingrese su usuario.");
@@ -472,54 +601,6 @@ public class Trabajo_Equipo {
         return S;
     }
 
-    public static void modificarPersona() {
-
-        String Opcion = "";
-        String Opcion2 = "";
-
-        String[] OpcionesM = {"Modificar Cliente", "Modificar Empleado", "Salir"};
-
-        Opcion = (String) JOptionPane.showInputDialog(null,
-                "Seleccione una opción", //Mensaje
-                "                                  MENU",//TITULO
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                OpcionesM,
-                OpcionesM[0]);
-
-        switch (Opcion) {
-            case "Modificar Cliente":
-                String[] OpcionesMC = {"Modificar Usuario", "Modificar Contraseña",
-                    "Modificar Correo", "Moficicar ID", "Modificar Nombre"};
-                Opcion2 = (String) JOptionPane.showInputDialog(null,
-                        "Seleccione una opción", //Mensaje
-                        "                                  MENU",//TITULO
-                        JOptionPane.QUESTION_MESSAGE,
-                        null,
-                        OpcionesMC,
-                        OpcionesMC[0]);
-
-                switch (Opcion2) {
-                    case "Modificar Usuario":
-                        int posicion;
-                        String Username;
-                        posicion = Integer.parseInt(JOptionPane.showInputDialog("" + "Cliente a modificar: "));
-                        Username = JOptionPane.showInputDialog("" + "Nuevo Username: ");
-                        ((Clientes) Usuario.get(posicion)).setUsername(Username);
-                        break;
-                }
-
-                break;
-            case "Modificar Empleado":
-                break;
-        }
-
-        /* int posicion;
-        String Username;
-        posicion=Integer.parseInt(JOptionPane.showInputDialog(""+"Posicion a modificar: "));
-        Username=JOptionPane.showInputDialog(""+"Nuevo Username: ");
-        ((Usuario).get(p)).setAncho(a);*/
-    }
 
     public static void Factura(ArrayList Lista, ArrayList Cesta) {
         int Pos = -5;
