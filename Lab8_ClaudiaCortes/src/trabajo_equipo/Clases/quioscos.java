@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class quioscos extends Locales{
     private String Nombre_Tienda;
-    String producto;
+    Comida producto;
    private ArrayList<Productos>Productos=new ArrayList();
     //Tiendas t=new Tiendas();
 
@@ -13,7 +13,7 @@ public class quioscos extends Locales{
         super();
     }
 
-    public quioscos(String Nombre_Tienda, String producto) {
+    public quioscos(String Nombre_Tienda, Comida producto) {
         this.Nombre_Tienda = Nombre_Tienda;
         this.producto = producto;
     }
@@ -26,11 +26,11 @@ public class quioscos extends Locales{
         this.Nombre_Tienda = Nombre_Tienda;
     }
 
-    public String getProducto() {
+    public Comida getProducto() {
         return producto;
     }
 
-    public void setProducto(String producto) {
+    public void setProducto(Comida producto) {
         this.producto = producto;
     }
 

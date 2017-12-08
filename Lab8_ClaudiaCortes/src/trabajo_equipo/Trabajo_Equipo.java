@@ -16,14 +16,15 @@ public class Trabajo_Equipo {
     public static ArrayList<Productos> Producto = new ArrayList();
     public static ArrayList<String> Codigos = new ArrayList();
     public static ArrayList<String> nicks = new ArrayList();
-    public static String Socio = "Claudia";
-    public static String ContraSocio = "123456";
+    public static String Socio = "clau";
+    public static String ContraSocio = "123";
     public static int PosicionU=-9;
+  public static ArrayList<String> nombre_Tiendas = new ArrayList();
 
     public static void main(String[] args) {
         String Opcion = "";
         while (Opcion != "Salir") {
-            String[] Opciones = {"Crear Usuario", "Log in Cliente", "Log in Empleados", "Salir"};
+            String[] Opciones = {"Crear Usuario", "Log in Cliente", "Log in socio", "Salir"};
             Opcion = (String) JOptionPane.showInputDialog(null,
                     "Seleccione una opción", //Mensaje
                     "                                  MENU",//TITULO
@@ -41,7 +42,8 @@ public class Trabajo_Equipo {
                     }
                     break;
                 case "Log in socio":
-                    if (LoginEmpleado(Usuario)) {
+                    if (LoginSocio(Usuario)) {
+                         JOptionPane.showMessageDialog(null, "Bienvenido Socio");
                         MenuEmpleado();
                     } else {
                         JOptionPane.showMessageDialog(null, "Error en los datos");
@@ -104,18 +106,24 @@ public class Trabajo_Equipo {
     }
 
     public static void CrearProducto() {
-        double precio = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el precio del producto:"));
+        int descuento = 0;
+        double precio = 0.0;
         String Deesfripcion = JOptionPane.showInputDialog("Ingrese la descripcion del producto");
         String Marca = JOptionPane.showInputDialog("Ingrese la marca del producto");
-        int descuento = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el descuento del producto:"));
+        try {
+            descuento = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el descuento del producto:"));
+            precio = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el precio del producto:"));
+        } catch (Exception e) {
+
+        }
         String Opcion = "";
         String[] Opciones = {"Comida", "Ropa", "Juguetes"};
         switch (Opcion) {
             case "Comida":
-                    Comida C= new Comida();
-                    C.setDescripcion(Deesfripcion);
-                    C.setDescuento(descuento);
-                    C.setMarca(Marca);
+                Comida C = new Comida();
+                C.setDescripcion(Deesfripcion);
+                C.setDescuento(descuento);
+                C.setMarca(Marca);
                 Producto.add(C);
                 break;
             case "Ropa":
@@ -126,7 +134,7 @@ public class Trabajo_Equipo {
                 Producto.add(R);
                 break;
             case "Juguetes":
-               Juguetes J = new Juguetes();
+                Juguetes J = new Juguetes();
                 J.setDescripcion(Deesfripcion);
                 J.setDescuento(descuento);
                 J.setMarca(Marca);
@@ -153,6 +161,7 @@ public class Trabajo_Equipo {
         Locales L = new Locales();
         String Nombre = "";
         int Piso = -2;
+
         Nombre = JOptionPane.showInputDialog("el Nombre de la cliente");
         String Opcion = "";
         String[] Opciones = {"Tienda", "Quiosco", "Local Comida"};
@@ -163,18 +172,80 @@ public class Trabajo_Equipo {
                 null,
                 Opciones,
                 Opciones[0]);
+        while (Piso <= 0) {
+            try {
+                Piso = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el piso del edificio"));
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Los pisos son unicamente datos numericos");
+                Piso = 0;
+            }
+        }
         switch (Opcion) {
             case "Tienda":
                 T.setNombre(Nombre);
                 T.setNum_Piso(Piso);
+                int Metros = 0;
+                while (Metros <= 0 || Metros > 18) {
+                    try {
+                        Metros = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el piso del edificio"));
+                        if (Metros > 18) {
+                            JOptionPane.showMessageDialog(null, "Las tiendas no pueden tener mas de 18 Metros .");
+                        }
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Los pisos son unicamente datos numericos");
+                        Metros = 0;
+                    }
+                }
+                T.setTamano(Metros);
                 Tienda.add(T);
+                nombre_Tiendas.add(Nombre);
                 break;
             case "Quiosco":
+                String[] Nombres = new String[nombre_Tiendas.size()];
+                for (int i = 0; i < nombre_Tiendas.size(); i++) {
+                    Nombres[i] = nombre_Tiendas.get(i);
+                }
+                String Tiendita;
+                Tiendita = (String) JOptionPane.showInputDialog(null,
+                        "Nombre de las tiendas existentes", //Mensaje
+                        "                                  Nombre del quiosco",//TITULO
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        Nombres,
+                        Nombres[0]);
                 Q.setNombre(Nombre);
                 Q.setNum_Piso(Piso);
+                Q.setNombre_Tienda(Tiendita);
                 Tienda.add(Q);
                 break;
             case "Local Comida":
+                String Impresion = "Seleeccine el producto del dia: \n";
+                for (int i = 0; i < Producto.size(); i++) {
+                    Impresion += i + " )" + Producto.get(i);
+
+                }
+                int indice = 0;
+                while (indice < 0 || indice > Producto.size() - 1) {
+                    try {
+                        indice = Integer.parseInt(JOptionPane.showInputDialog(Impresion));
+                        if (indice < 0 || indice > Producto.size() - 1) {
+                            JOptionPane.showMessageDialog(null, "El numero se encuentra fuera de rango");
+                            continue;
+                        }
+                        if (Producto.get(indice) instanceof Comida) {
+                            double Precio = Producto.get(indice).getPrecio()/2;
+                            Producto.get(indice).setPrecio(Precio);
+                            Q.setProducto(((Comida) Producto.get(indice)));
+                            JOptionPane.showMessageDialog(null, "Producto agregado con 50% de descuento.");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "El producto seleccionado no es alimenticio.");
+                            continue;
+                        }
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "El dato es incorrecto");
+                        indice = -6;
+                    }
+                }
                 Q.setNombre(Nombre);
                 Q.setNum_Piso(Piso);
                 Tienda.add(Q);
@@ -248,13 +319,14 @@ public class Trabajo_Equipo {
 
     }
 
+    
     public static void MenuEmpleado() {
         String Opcion = "";
         String[] Opciones = {"Crear Tienda", "Agregar Empleados a las tienda", "Agregar Productos a la tienda", "Modificar"};
         String[] Opciones2 = {"Personas", "Tiendas", "Productos"};
         Opcion = (String) JOptionPane.showInputDialog(null,
-                "Tipo de tienda que desea crear", //Mensaje
-                "                                  Tipo_Tienda",//TITULO
+                "Bienvenido al Menu principal: Socio", //Mensaje
+                "                                  Menu principal",//TITULO
                 JOptionPane.QUESTION_MESSAGE,
                 null,
                 Opciones,
@@ -310,19 +382,24 @@ public class Trabajo_Equipo {
         return Acceso;
     }
 
-    public static boolean LoginEmpleado(ArrayList Personas) {
+    public static boolean LoginSocio(ArrayList Personas) {
 
         String Usuario = JOptionPane.showInputDialog("Ingrese su usuario.");
-        String Contra = JOptionPane.showInputDialog("Ingrese su Contra.");
+        String Contra = JOptionPane.showInputDialog("Ingrese su Contraseña");
         boolean Acceso = false;
-        for (int i = 0; i < Personas.size(); i++) {
-            if (Personas.get(i) instanceof Empleados) {
-                if (Usuario.equals(((Personas) Personas.get(i)).getUsername()) && Contra.equals(((Personas) Personas.get(i)).getContraseña())) {
-                    System.out.println("ENCPNTROP COINCIDENCIA");
-                    Acceso = true;
-                }
-            }
+        if (Usuario.equals(Socio)&&ContraSocio.equals(Contra)) {
+            Acceso=true;
+        }else{
+            Acceso=false;
         }
+//        for (int i = 0; i < Personas.size(); i++) {
+//            if (Personas.get(i) instanceof Empleados) {
+//                if (Usuario.equals(((Personas) Personas.get(i)).getUsername()) && Contra.equals(((Personas) Personas.get(i)).getContraseña())) {
+//                    System.out.println("ENCPNTROP COINCIDENCIA");
+//                    Acceso = true;
+//                }
+//            }
+//        }
         return Acceso;
     }
 
