@@ -10,7 +10,7 @@ import trabajo_equipo.Clases.*;
 public class Trabajo_Equipo {
 
     public static Random Ran = new Random();
-    public static ArrayList<Personas> Usuario = new ArrayList();
+    public static ArrayList<Clientes> Usuario = new ArrayList();
     public static ArrayList<Empleados> Empleado = new ArrayList();
     public static ArrayList<Locales> Tienda = new ArrayList();
     public static ArrayList<Productos> Producto = new ArrayList();
@@ -24,13 +24,11 @@ public class Trabajo_Equipo {
     public static Empleados Empleado_Actual;
     public static Locales Tienda_Actual;
     public static Productos Producto_Actual;
-     
-    
 
     public static void main(String[] args) {
         String Opcion = "";
         while (Opcion != "Salir") {
-            String[] Opciones = {"Crear Usuario", "Log in Cliente", "Log in socio","Salir"};
+            String[] Opciones = {"Crear Usuario", "Log in Cliente", "Log in socio", "Salir"};
             try {
                 Opcion = (String) JOptionPane.showInputDialog(null,
                         "Seleccione una opción", //Mensaje
@@ -66,7 +64,7 @@ public class Trabajo_Equipo {
                     CrearUsuario();
                     break;
                 case "Salir":
-                    JOptionPane.showMessageDialog(null,"Saliendo del sistema");
+                    JOptionPane.showMessageDialog(null, "Saliendo del sistema");
                     break;
             }
         }
@@ -101,8 +99,8 @@ public class Trabajo_Equipo {
         String Correo = "";
         String Id = "";
         String Nombre = "";
-        double Dinero=0.0;
-        int numerito=0;
+        double Dinero = 0.0;
+        int numerito = 0;
         User = JOptionPane.showInputDialog("Ingrese su UserName");
         while (nicks.contains(User)) {
             User = JOptionPane.showInputDialog("Ingrese su User Name");
@@ -127,9 +125,11 @@ public class Trabajo_Equipo {
         Cli.setDinero(Dinero);
         Cli.setNombrecompleto(Nombre);
         Cli.setUsername(User);
-        JOptionPane.showMessageDialog(null,"Cliente Creado");
+        JOptionPane.showMessageDialog(null, "Cliente Creado");
+        //Usuario.add(Cli);
+        System.out.println(Empleado);
         return Cli;
-        
+
     }
 
     public static void CrearProducto() {
@@ -137,17 +137,17 @@ public class Trabajo_Equipo {
         double precio = 0.0;
         String Deescripcion = JOptionPane.showInputDialog("Ingrese la descripcion del producto");
         String Marca = JOptionPane.showInputDialog("Ingrese la marca del producto");
-       int Num=0;
-       while(Num==0){
+        int Num = 0;
+        while (Num == 0) {
             try {
-            descuento = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el descuento del producto:"));
-            precio = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el precio del producto:"));
-            Num=6;
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Error en los datos, vuelva a ingresarlos");
-            Num=0;
+                descuento = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el descuento del producto:"));
+                precio = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el precio del producto:"));
+                Num = 6;
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error en los datos, vuelva a ingresarlos");
+                Num = 0;
+            }
         }
-       }
         String Opcion = "";
         String[] Opciones = {"Comida", "Ropa", "Juguetes"};
         switch (Opcion) {
@@ -163,9 +163,9 @@ public class Trabajo_Equipo {
                 R.setDescripcion(Deescripcion);
                 R.setDescuento(descuento);
                 R.setMarca(Marca);
-                String Talla=JOptionPane.showInputDialog(null,"Ingrese la talla de la ropa");
-                String Genero =JOptionPane.showInputDialog(null,"Sexo de la ropa.");
-                R.setGenero(Genero.charAt(0)+"");
+                String Talla = JOptionPane.showInputDialog(null, "Ingrese la talla de la ropa");
+                String Genero = JOptionPane.showInputDialog(null, "Sexo de la ropa.");
+                R.setGenero(Genero.charAt(0) + "");
                 R.setTalla(Talla);
                 Producto.add(R);
                 break;
@@ -174,12 +174,12 @@ public class Trabajo_Equipo {
                 J.setDescripcion(Deescripcion);
                 J.setDescuento(descuento);
                 J.setMarca(Marca);
-                String Tipo=JOptionPane.showInputDialog(null,"Ingrese el tipo de jueguete");
-               J.setTipo(Tipo);
+                String Tipo = JOptionPane.showInputDialog(null, "Ingrese el tipo de jueguete");
+                J.setTipo(Tipo);
                 Producto.add(J);
                 break;
         }
-        JOptionPane.showMessageDialog(null,"Producto agregado");
+        JOptionPane.showMessageDialog(null, "Producto agregado");
     }
 
     public static void AgregarEmpleados() {
@@ -189,7 +189,7 @@ public class Trabajo_Equipo {
         } else {
             int Pos2 = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el empleado a agregar: \n" + ImprimirE()));
             Tienda.get(Pos).setEmple(Empleado.get(Pos2));
-            JOptionPane.showMessageDialog(null,"Empleado agregado");
+            JOptionPane.showMessageDialog(null, "Empleado agregado");
         }
         System.out.println("LAS TIENDAS: \n"
                 + Tienda);
@@ -300,10 +300,10 @@ public class Trabajo_Equipo {
                 Q.setNombre(Nombre);
                 Q.setNum_Piso(Piso);
                 Tienda.add(Q);
-                
+
                 break;
         }
-        JOptionPane.showMessageDialog(null,"Tienda creada agregado");
+        JOptionPane.showMessageDialog(null, "Tienda creada agregado");
     }
 
     public static Calendar GenerarFecha() {
@@ -363,8 +363,12 @@ public class Trabajo_Equipo {
         EMP.setFehanacimiento(Fecha);
         EMP.setNombrecompleto(Nombre);
         EMP.setUsername(User);
+        JOptionPane.showMessageDialog(null, "Empleado Creado");
+        System.out.println(Empleado);
+        Empleado.add(EMP);
+        System.out.println("LOS EMPLEADOS" + Empleado);
         return EMP;
-        
+
     }
 
     public static void Menucliente() {
@@ -374,14 +378,26 @@ public class Trabajo_Equipo {
 
     public static void MenuEmpleado() {
         String Opcion = "";
-        String[] Opciones = {"Crear Tienda", "Agregar Empleados a tiendas", "Agregar Productos a la tienda", "Modificar","Eliminar"};
-        Opcion = (String) JOptionPane.showInputDialog(null,
-                "Bienvenido al Menu principal: Socio", //Mensaje
-                "                                  Menu principal",//TITULO
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                Opciones,
-                Opciones[0]);
+        String[] Opciones = {"Crear Tienda", "Crear Empleado", "Agregar Empleados a tiendas", "Agregar Productos a la tienda", "Modificar", "Eliminar"};
+        int Bandera = 0;
+        while (Bandera == 0) {
+            try {
+                Opcion = (String) JOptionPane.showInputDialog(null,
+                        "Bienvenido al Menu principal: Socio", //Mensaje
+                        "                                  Menu principal",//TITULO
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        Opciones,
+                        Opciones[0]);
+                if (Opcion == null) {
+                    Bandera = 0;
+                } else {
+                    Bandera = 6;
+                }
+            } catch (Exception e) {
+
+            }
+        }
         switch (Opcion) {
             case "Eliminar":
                 Eliminar();
@@ -391,16 +407,20 @@ public class Trabajo_Equipo {
                 break;
             case "Agregar Empleados a tiendas":
                 Empleado.add(CrearEmpleado());
+                System.out.println("LISTA DE EMPLEADOS CREADOS" + Empleado);
                 break;
             case "Agregar Productos a la tienda":
                 CrearProducto();
                 break;
             case "Modificar":
-            Modificar();
+                Modificar();
+                break;
+            case "Crear Empleado":
+                CrearEmpleado();
                 break;
         }
     }
-    
+
     public static void Modificar() {
         String Opcion = "";
         String[] Opciones2 = {"Empleados", "Tiendas", "Productos"};
@@ -423,10 +443,11 @@ public class Trabajo_Equipo {
 
             }
         }
-       
+
         switch (Opcion) {
             case "Empleados":
                 modificarPersona();
+                System.out.println("MODIFICANDO PERSONAS");
                 break;
             case "Tiendas":
                 ModificarTiendas();
@@ -437,62 +458,135 @@ public class Trabajo_Equipo {
 
         }
     }
-        public static void modificarPersona() {
 
+    public static void modificarPersona() {
         String Opcion = "";
         String Opcion2 = "";
-
-        String[] OpcionesM = {"Modificar Cliente", "Modificar Empleado", "Salir"};
-
-        Opcion = (String) JOptionPane.showInputDialog(null,
-                "Seleccione una opción", //Mensaje
-                "                                  MENU",//TITULO
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                OpcionesM,
-                OpcionesM[0]);
-
-        switch (Opcion) {
-            case "Modificar Cliente":
-                String[] OpcionesMC = {"Modificar Usuario", "Modificar Contraseña",
-                    "Modificar Correo", "Moficicar ID", "Modificar Nombre"};
-                Opcion2 = (String) JOptionPane.showInputDialog(null,
+        int Bandera = 0;
+        int Pos = 0;
+        String[] OpcionesM = {"Modificar Cliente", "Modificar Empleado"};
+        while (Bandera == 0) {
+            try {
+                Opcion = (String) JOptionPane.showInputDialog(null,
                         "Seleccione una opción", //Mensaje
                         "                                  MENU",//TITULO
                         JOptionPane.QUESTION_MESSAGE,
                         null,
-                        OpcionesMC,
-                        OpcionesMC[0]);
+                        OpcionesM,
+                        OpcionesM[0]);
+                if (Opcion == null) {
+                    Bandera = 0;
+                    continue;
+                }
+                ArrayList Lista_Modificar = null;
 
-                switch (Opcion2) {
-                    case "Modificar Usuario":
-                        int posicion;
-                        String Username;
-                        posicion = Integer.parseInt(JOptionPane.showInputDialog("" + "Cliente a modificar: "));
-                        Username = JOptionPane.showInputDialog("" + "Nuevo Username: ");
-                        ((Clientes) Usuario.get(posicion)).setUsername(Username);
-                        break;
+                String Salida = "";
+                if (Opcion.equals("Modificar Cliente")) {
+                    Salida += ImprimirC();
+                    System.out.println("IMPRIMIENDO C" + ImprimirC());
+                    Lista_Modificar = Usuario;
+                } else if (Opcion.equals("Modificar Empleado")) {
+                    Salida += ImprimirE();
+                    System.out.println("IMPRIMIENDO C" + ImprimirE());
+                    Lista_Modificar = Empleado;
+                }
+                System.out.println("LA SALIDA" + Salida);
+                Pos = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la Posicion que desea Modificar" + Salida));
+                if (Pos < 0 || Pos > Lista_Modificar.size() - 1) {
+                    JOptionPane.showMessageDialog(null, "La posicion esta fuera de rango.");
+                    Bandera = 0;
+                } else {
+                    Bandera = 6;
                 }
 
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "La posicion es un valor numerico unicamente.");
+            }
+        }
+        String User = "";
+        String Contra = "";
+        String Correo = "";
+        String Id = "";
+        String Nombre = "";
+        User = JOptionPane.showInputDialog("Ingrese su UserName");
+        while (nicks.contains(User)) {
+            User = JOptionPane.showInputDialog("Ingrese su User Name");
+        }
+        nicks.add(User);
+        Contra = JOptionPane.showInputDialog("Ingrese su Contraseña");
+        Correo = JOptionPane.showInputDialog("Ingrese su Correo");
+        Nombre = JOptionPane.showInputDialog("Ingrese su Nombre");
+        Id = GenerarCodigo();
+        switch (Opcion) {
+            case "Modificar Cliente":
+                int Bandera_2 = 0;
+                while (Bandera_2 == 0) {
+                    try {
+                        double Bandera_1 = 0.0;
+                        double Dinero = 0.0;
+
+                        while (Bandera_1 == 0) {
+                            try {
+                                Dinero = Double.parseDouble(JOptionPane.showInputDialog("Ingrese la cantidad de dinero que tiene disponible"));
+                                if (Dinero > 0.0) {
+                                    Bandera_1 = 9;
+                                }
+                            } catch (Exception e) {
+                                JOptionPane.showMessageDialog(null, "Los valores deben ser un numero decimal ");
+                                Bandera_1 = 0;
+                            }
+                        }
+                        Clientes EMP = Usuario.get(Pos);
+                        Calendar Fecha = GenerarFecha();
+                        EMP.setContraseña(Contra);
+                        EMP.setCorreo(Correo);
+                        EMP.setFehanacimiento(Fecha);
+                        EMP.setNombrecompleto(Nombre);
+                        EMP.setUsername(User);
+                        Bandera_1 = 6;
+                        Bandera_2 = 6;
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Ha ocurrido un error...reiniciando");
+                    }
+                }
                 break;
             case "Modificar Empleado":
+                int Bandera_3 = 0;
+                while (Bandera_3 == 0) {
+                    try {
+                        String Horario = JOptionPane.showInputDialog(null, "Ingrese el nuevo horario de trabajo del empleado");
+                        Empleados EMP = Empleado.get(Pos);
+                        Calendar Fecha = GenerarFecha();
+                        EMP.setContraseña(Contra);
+                        EMP.setCorreo(Correo);
+                        EMP.setFehanacimiento(Fecha);
+                        EMP.setNombrecompleto(Nombre);
+                        EMP.setUsername(User);
+                        EMP.setHorario(Horario);
+                        Bandera_3 = 6;
+                    } catch (Exception e) {
+                        Bandera_3 = 0;
+                        JOptionPane.showMessageDialog(null, "Ha ocurrido un error...reiniciando");
+                    }
+                }
                 break;
         }
     }
 
-    public static void ModificarTiendas(){
-        
+    public static void ModificarTiendas() {
+
     }
-    public static void  ModificarProductos(){
-        
+
+    public static void ModificarProductos() {
+
     }
-    
+
     public static void Eliminar() {
         String[] Opciones2 = {"Empleados", "Tiendas", "Productos"};
         int Num = 0;
-        String Opcion ="";
+        String Opcion = "";
         while (Num == 0) {
-             Opcion = (String) JOptionPane.showInputDialog(null,
+            Opcion = (String) JOptionPane.showInputDialog(null,
                     "Seleeccione la opcion que desea Eliminar", //Mensaje
                     "                                  ELIMINAR",//TITULO
                     JOptionPane.QUESTION_MESSAGE,
@@ -505,42 +599,43 @@ public class Trabajo_Equipo {
                 Num = 6;
             }
         }
-         String Lista;
-         ArrayList Lista_Eliminar=null;
+        String Lista;
+        ArrayList Lista_Eliminar = null;
         switch (Opcion) {
             case "Empleados":
-               Lista =ImprimirE();
-               Lista_Eliminar=Empleado;
+                Lista = ImprimirE();
+                Lista_Eliminar = Empleado;
                 break;
             case "Tiendas":
-                Lista=Imprimir();
-                Lista_Eliminar=Tienda;
+                Lista = Imprimir();
+                Lista_Eliminar = Tienda;
                 break;
             case "Productos":
-                Lista=ImprimirP() ;
-                Lista_Eliminar=Producto;
+                Lista = ImprimirP();
+                Lista_Eliminar = Producto;
                 break;
         }
-        int POS=0;
-        while(POS<0||POS>Lista_Eliminar.size()-1){
-            try{
-                POS= Integer.parseInt(JOptionPane.showInputDialog(null,"Ingrese la posicion del elemento e liminar"));
-                if (POS>Lista_Eliminar.size()-1) {
-                    JOptionPane.showMessageDialog(null,"Numero fuera de rango");
-                    POS=-9;
-                }else{
+        int POS = 0;
+        while (POS < 0 || POS > Lista_Eliminar.size() - 1) {
+            try {
+                POS = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la posicion del elemento e liminar"));
+                if (POS > Lista_Eliminar.size() - 1) {
+                    JOptionPane.showMessageDialog(null, "Numero fuera de rango");
+                    POS = -9;
+                } else {
                     Lista_Eliminar.remove(POS);
-                    JOptionPane.showMessageDialog(null,"Elemento Eliminado Exitosamente.");
+                    JOptionPane.showMessageDialog(null, "Elemento Eliminado Exitosamente.");
                     System.out.println("LA NUEVA LISTA DE LOS ELEMENTOS");
                     System.out.println(Lista_Eliminar);
                 }
-            }catch(Exception e){
-                JOptionPane.showMessageDialog(null,"Dato Invalido");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Dato Invalido");
             }
         }
     }
+
     public static boolean LoginCliente(ArrayList Personas) {
-        System.out.println(Usuario);
+        System.out.println("USUARIOS DISPONIBLES " + Usuario);
         String Usuario = JOptionPane.showInputDialog("Ingrese su usuario.");
         String Contra = JOptionPane.showInputDialog("Ingrese su Contra.");
         boolean Acceso = false;
@@ -580,7 +675,15 @@ public class Trabajo_Equipo {
     public static String Imprimir() {
         String S = "";
         for (int i = 0; i < Tienda.size(); i++) {
-            S += i + ")" + Tienda.get(i);
+            S += i + ")" + Tienda.get(i).getNombre();
+        }
+        return S;
+    }
+
+    public static String ImprimirC() {
+        String S = "";
+        for (int i = 0; i < Usuario.size(); i++) {
+            S += i + ")" + Usuario.get(i).getNombrecompleto();
         }
         return S;
     }
@@ -588,7 +691,7 @@ public class Trabajo_Equipo {
     public static String ImprimirE() {
         String S = "";
         for (int i = 0; i < Empleado.size(); i++) {
-            S += i + ")" + Empleado.get(i);
+            S += i + ")" + Empleado.get(i).getNombrecompleto();
         }
         return S;
     }
@@ -596,11 +699,10 @@ public class Trabajo_Equipo {
     public static String ImprimirP() {
         String S = "";
         for (int i = 0; i < Producto.size(); i++) {
-            S += i + ")" + Producto.get(i);
+            S += i + ")" + Producto.get(i).getPrecio() + " " + Producto.get(i).getDescripcion();
         }
         return S;
     }
-
 
     public static void Factura(ArrayList Lista, ArrayList Cesta) {
         int Pos = -5;
