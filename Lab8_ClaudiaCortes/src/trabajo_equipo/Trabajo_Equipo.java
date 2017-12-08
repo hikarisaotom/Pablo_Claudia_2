@@ -797,20 +797,9 @@ public class Trabajo_Equipo {
         String[] Opciones = {"Tienda", "Quiosco", "Local Comida"};
         int Bandera_1 = 0;
         int Piso = 0;
-        while (Bandera_1 == 0) {
-            Opcion = (String) JOptionPane.showInputDialog(null,
-                    "Tipo de tienda que desea crear", //Mensaje
-                    "                                  Tipo_Tienda",//TITULO
-                    JOptionPane.QUESTION_MESSAGE,
-                    null,
-                    Opciones,
-                    Opciones[0]);
-            if (Opcion == null) {
-                Bandera_1 = 0;
-                continue;
-            }
+        
 
-        }
+        
         Nombre = JOptionPane.showInputDialog("el Nombre de la tienda");
         while (Piso <= 0) {
             try {
@@ -984,11 +973,19 @@ public class Trabajo_Equipo {
                     Opciones2,
                     Opciones2[0]);
             if (Opcion == null) {
-                continue;
+               Num=0;
             } else {
                 Num = 6;
             }
         }
+//        int Op=Integer.parseInt(JOptionPane.showInputDialog("prueba"));
+//        if (Op<0||Op>3||Op==0) {
+//            Opcion="Empleados";
+//        }else if (Op==1){
+//              Opcion="Tiendas";
+//        }else{
+//                 Opcion="Productos";
+//                }
         String Lista;
         ArrayList Lista_Eliminar = null;
         switch (Opcion) {
@@ -1005,7 +1002,7 @@ public class Trabajo_Equipo {
                 Lista_Eliminar = Producto;
                 break;
         }
-        int POS = 0;
+        int POS = -5;
         while (POS < 0 || POS > Lista_Eliminar.size() - 1) {
             try {
                 POS = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la posicion del elemento e liminar"));
