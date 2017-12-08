@@ -162,6 +162,29 @@ public class Trabajo_Equipo {
         }
         String Opcion = "";
         String[] Opciones = {"Comida", "Ropa", "Juguetes"};
+        int Bandera_2=0;
+        while(Bandera_2==0){
+                try {
+                Opcion = (String) JOptionPane.showInputDialog(null,
+                        "Seleccione una opción", //Mensaje
+                        "                                  MENU",//TITULO
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        Opciones,
+                        Opciones[0]);
+                if (Opcion == null) {
+                    continue;
+                }else{
+                    Bandera_2=3;
+                }
+            } catch (java.lang.NullPointerException x) {
+
+            }
+        }
+        System.out.println(Deescripcion );
+        System.out.println(precio);
+        System.out.println( descuento);
+       
         switch (Opcion) {
             case "Comida":
                 Comida C = new Comida();
@@ -171,6 +194,7 @@ public class Trabajo_Equipo {
                 C.setMarca(Marca);
               //  Producto.add(C);
                  Producto.add(C);
+                 System.out.println(C);
                  P=C;
                 break;
             case "Ropa":
@@ -200,7 +224,7 @@ public class Trabajo_Equipo {
                   P=J;
                 break;
         }
-       Producto.add(P);
+      // Producto.add(P);
         System.out.println("LOS PRODUCTOS "+Producto);
         JOptionPane.showMessageDialog(null, "Producto agregado");
       
