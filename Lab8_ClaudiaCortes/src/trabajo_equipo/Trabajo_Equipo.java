@@ -986,7 +986,7 @@ public class Trabajo_Equipo {
 //        }else{
 //                 Opcion="Productos";
 //                }
-        String Lista;
+        String Lista="";
         ArrayList Lista_Eliminar = null;
         switch (Opcion) {
             case "Empleados":
@@ -1005,7 +1005,7 @@ public class Trabajo_Equipo {
         int POS = -5;
         while (POS < 0 || POS > Lista_Eliminar.size() - 1) {
             try {
-                POS = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la posicion del elemento e liminar"));
+                POS = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la posicion del elemento e liminar\n"+Lista));
                 if (POS > Lista_Eliminar.size() - 1) {
                     JOptionPane.showMessageDialog(null, "Numero fuera de rango");
                     POS = -9;
