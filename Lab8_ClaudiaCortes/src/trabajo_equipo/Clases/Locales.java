@@ -10,10 +10,18 @@ public class Locales {
         protected ArrayList<Productos> Produc = new ArrayList();
          protected ArrayList<Empleados> Emple = new ArrayList();
         protected Empleados Empleado;
-        
+        ArrayList <Productos> Facturados =new ArrayList();
 
         public Locales() {
         }
+
+    public ArrayList<Productos> getFacturados() {
+        return Facturados;
+    }
+
+    public void setFacturados(ArrayList<Productos> Facturados) {
+        this.Facturados = Facturados;
+    }
 
     public ArrayList<Productos> getProduc() {
         return Produc;

@@ -71,16 +71,27 @@ public class Trabajo_Equipo {
     }
 
     public static void CrearUsuario() {
-        String Opcion;
+        String Opcion = "";
         String[] Opciones = {"Cliente"};
-
-        Opcion = (String) JOptionPane.showInputDialog(null,
-                "Seleccione una opción", //Mensaje
-                "                                  MENU",//TITULO
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                Opciones,
-                Opciones[0]);
+        int Bandera_1 = 0;
+        while (Bandera_1 == 0) {
+            try {
+                Opcion = (String) JOptionPane.showInputDialog(null,
+                        "Seleccione una opción", //Mensaje
+                        "                                  MENU",//TITULO
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        Opciones,
+                        Opciones[0]);
+                if (Opcion == null) {
+                    Bandera_1 = 0;
+                } else {
+                    Bandera_1 = 6;
+                }
+            } catch (Exception e) {
+                Bandera_1 = 0;
+            }
+        }
         switch (Opcion) {
             case "Cliente":
                 Usuario.add(CrearCliente());
@@ -100,7 +111,7 @@ public class Trabajo_Equipo {
         String Id = "";
         String Nombre = "";
         double Dinero = 0.0;
-        int numerito = 0;
+        int Bandera_1 = 0;
         User = JOptionPane.showInputDialog("Ingrese su UserName");
         while (nicks.contains(User)) {
             User = JOptionPane.showInputDialog("Ingrese su User Name");
@@ -109,13 +120,13 @@ public class Trabajo_Equipo {
         Contra = JOptionPane.showInputDialog("Ingrese su Contraseña");
         Correo = JOptionPane.showInputDialog("Ingrese su Correo");
         Nombre = JOptionPane.showInputDialog("Ingrese su Nombre Completo");
-        while (numerito == 0) {
+        while (Bandera_1 == 0) {
             try {
                 Dinero = Double.parseDouble(JOptionPane.showInputDialog("Ingrese la cantidad de dinero que tiene disponible"));
-                numerito = 9;
+                Bandera_1 = 9;
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Los valores deben ser un numero decimal ");
-                numerito = 0;
+                Bandera_1 = 0;
             }
         }
         Id = GenerarCodigo();
@@ -137,15 +148,15 @@ public class Trabajo_Equipo {
         double precio = 0.0;
         String Deescripcion = JOptionPane.showInputDialog("Ingrese la descripcion del producto");
         String Marca = JOptionPane.showInputDialog("Ingrese la marca del producto");
-        int Num = 0;
-        while (Num == 0) {
+        int Bandera_1 = 0;
+        while (Bandera_1 == 0) {
             try {
                 descuento = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el descuento del producto:"));
                 precio = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el precio del producto:"));
-                Num = 6;
+                Bandera_1 = 6;
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Error en los datos, vuelva a ingresarlos");
-                Num = 0;
+                Bandera_1 = 0;
             }
         }
         String Opcion = "";
@@ -183,11 +194,41 @@ public class Trabajo_Equipo {
     }
 
     public static void AgregarEmpleados() {
-        int Pos = Integer.parseInt(JOptionPane.showInputDialog("Lista de tiendas disponibles hasta el momento: \n" + Imprimir()));
+        int Pos = 0;
+        int Bandera_1 = 0;
+        int Bandera_2 = 0;
+        while (Bandera_1 == 0) {
+            try {
+                Pos = Integer.parseInt(JOptionPane.showInputDialog("Lista de tiendas disponibles hasta el momento: \n" + Imprimir()));
+                if (Pos < 0 || Pos > Tienda.size() - 1) {
+                    JOptionPane.showConfirmDialog(null, "El numero esta fuera de Rango");
+                    Bandera_1 = 0;
+                } else {
+                    Bandera_1 = 6;
+                }
+            } catch (Exception e) {
+                Bandera_1 = 0;
+            }
+        }
+
         if (Tienda.get(Pos).getEmple().size() == 4 && Tienda.get(Pos) instanceof Locales_Comida) {
             JOptionPane.showMessageDialog(null, "Numero maximo de empleados encontrado");
         } else {
-            int Pos2 = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el empleado a agregar: \n" + ImprimirE()));
+            /*EMPLEADOS*/
+            int Pos2 = 0;
+            while (Bandera_2 == 0) {
+                try {
+                    Pos2 = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el empleado a agregar: \n" + ImprimirE()));
+                    if (Pos2 < 0 || Pos > Empleado.size() - 1) {
+                        JOptionPane.showConfirmDialog(null, "El numero esta fuera de Rango");
+                        Bandera_2 = 0;
+                    } else {
+                        Bandera_2 = 6;
+                    }
+                } catch (Exception e) {
+                    Bandera_2 = 0;
+                }
+            }
             Tienda.get(Pos).setEmple(Empleado.get(Pos2));
             JOptionPane.showMessageDialog(null, "Empleado agregado");
         }
@@ -206,8 +247,8 @@ public class Trabajo_Equipo {
 
         String Opcion = "";
         String[] Opciones = {"Tienda", "Quiosco", "Local Comida"};
-        int Numero = 0;
-        while (Numero == 0) {
+        int Bandera_1 = 0;
+        while (Bandera_1 == 0) {
             Opcion = (String) JOptionPane.showInputDialog(null,
                     "Tipo de tienda que desea crear", //Mensaje
                     "                                  Tipo_Tienda",//TITULO
@@ -215,11 +256,15 @@ public class Trabajo_Equipo {
                     null,
                     Opciones,
                     Opciones[0]);
+            if (Opcion==null) {
+                Bandera_1=0;
+                continue;
+            }
             if ((Opcion.equals("Quiosco") && nombre_Tiendas.size() == 0 || Opcion.equals("Local Comida")) && Producto.size() <= 0) {
                 JOptionPane.showMessageDialog(null, "Para crear Quioscos y locales de comida deben haber productos agregados");
-                Numero = 0;
+                Bandera_1 = 0;
             } else {
-                Numero = 5;
+                Bandera_1 = 5;
             }
         }
         Nombre = JOptionPane.showInputDialog("el Nombre de la tienda");
@@ -231,6 +276,7 @@ public class Trabajo_Equipo {
                 Piso = 0;
             }
         }
+     
         switch (Opcion) {
             case "Tienda":
                 T.setNombre(Nombre);
@@ -372,13 +418,53 @@ public class Trabajo_Equipo {
     }
 
     public static void Menucliente() {
-        int pos = Integer.parseInt(JOptionPane.showInputDialog("Tiendas disponibles" + Imprimir() + "\n Ingrese a cual desea Entrar.\n"));
-
+        int pos = 0;
+        int pos1 = 0;
+        int Bandera_1 = 0;
+        int Bandera_2 = 0;
+        while (Bandera_1 == 0) {
+            try {
+                pos = Integer.parseInt(JOptionPane.showInputDialog("Tiendas disponibles" + Imprimir() + "\n Ingrese a cual desea Entrar.\n"));
+                if (pos < 0 || pos > Tienda.size() - 1) {
+                    JOptionPane.showMessageDialog(null, "El valor esta fuera de rango.");
+                    Bandera_1 = 0;
+                } else {
+                    Bandera_1 = 3;
+                }
+            } catch (Exception e) {
+                Bandera_1 = 0;
+                JOptionPane.showMessageDialog(null, "La posicion debe ser un valor numerico");
+            }
+        }
+        Tienda_Actual = Tienda.get(pos);
+        while (Bandera_2 == 0) {
+            try {
+                pos1 = Integer.parseInt(JOptionPane.showInputDialog("Productos Disponibles" + ImprimirP() + "\n Ingrese que producto desea comprar.\n"));
+                if (pos1 < 0 || pos1 > Producto.size() - 1) {
+                    JOptionPane.showMessageDialog(null, "El valor esta fuera de rango.");
+                    Bandera_2 = 0;
+                } else {
+                    Bandera_2 = 3;
+                }
+            } catch (Exception e) {
+                Bandera_2 = 0;
+                JOptionPane.showMessageDialog(null, "La posicion debe ser un valor numerico");
+            }
+        }
+        Producto_Actual = Producto.get(pos1);
+        Double Descuento = 0.10 * Producto_Actual.getDescuento();
+        if (Cliente_Actual.getDinero() < Producto_Actual.getPrecio() - Descuento) {
+            JOptionPane.showMessageDialog(null, "No puede comprar el producto, su dinero es insuficiente");
+        } else {
+            JOptionPane.showMessageDialog(null, "Se ha agregado el producto al carrito ");
+            Cliente_Actual.getListaproductos().add(Producto_Actual);
+            Tienda_Actual.getFacturados().add(Producto_Actual);
+        }
     }
 
     public static void MenuEmpleado() {
         String Opcion = "";
-        String[] Opciones = {"Crear Tienda", "Crear Empleado", "Agregar Empleados a tiendas", "Agregar Productos a la tienda", "Modificar", "Eliminar"};
+        String[] Opciones = {"Crear Tienda", "Crear Empleado", "Crear Producto", "Agregar Empleados a tiendas", "Agregar Productos a la tienda", "Facturacion", "Modificar", "Eliminar"};
         int Bandera = 0;
         while (Bandera == 0) {
             try {
@@ -399,6 +485,23 @@ public class Trabajo_Equipo {
             }
         }
         switch (Opcion) {
+            case "Agregar Productos a la tienda":
+                AgregarProducto();
+                break;
+            case "Facturacion":
+                //Factura();
+                String S="";
+                for (int i = 0; i <Tienda.size(); i++) {
+                    if (Tienda.get(i).getFacturados().size()>=5) {
+                        S+=ImprimirF(Tienda.get(i));
+                    }
+                    if (S=="") {
+                        JOptionPane.showMessageDialog(null,"No se han vendido mas de 5 productos en ninguna tienda");
+                    }else{
+                           JOptionPane.showMessageDialog(null,"EMITIENDO FACTURAS: \n"+S);
+                    }
+                }
+                break;
             case "Eliminar":
                 Eliminar();
                 break;
@@ -406,10 +509,10 @@ public class Trabajo_Equipo {
                 CrearLocal();
                 break;
             case "Agregar Empleados a tiendas":
-                Empleado.add(CrearEmpleado());
+                AgregarEmpleados();
                 System.out.println("LISTA DE EMPLEADOS CREADOS" + Empleado);
                 break;
-            case "Agregar Productos a la tienda":
+            case "Crear Producto":
                 CrearProducto();
                 break;
             case "Modificar":
@@ -419,6 +522,58 @@ public class Trabajo_Equipo {
                 CrearEmpleado();
                 break;
         }
+    }
+
+    public static void AgregarProducto() {
+        int Pos_Tienda = 0;
+        int Pos_Producto = 0;
+        int Bandera_1 = 0;
+        int Bandera_2 = 0;
+        while (Bandera_1 == 0) {
+            try {
+                Pos_Tienda = Integer.parseInt(JOptionPane.showInputDialog(null, "SELECCIONE LA TIENDA A LA QUE DESEA AGREGAR EL PRODUCTO: \n" + Imprimir()));
+                if (Pos_Tienda < 0 || Pos_Tienda >= Tienda.size() - 1) {
+                    Bandera_1 = 0;
+                    JOptionPane.showMessageDialog(null, "El numero se encuentra fuera del rango");
+                } else {
+                    Bandera_1 = 6;
+                }
+            } catch (Exception e) {
+                Bandera_1 = 0;
+                JOptionPane.showMessageDialog(null, "La posicion debe ser un valor numerico");
+            }
+        }
+
+        while (Bandera_2 == 0) {
+            try {
+                Pos_Producto = Integer.parseInt(JOptionPane.showInputDialog(null, "SELECCIONE EL PRODUCTO QUE DESEA AGREGAR: \n" + ImprimirP()));
+                if (Pos_Producto < 0 || Pos_Producto >= Producto.size() - 1) {
+                    Bandera_2 = 0;
+                    JOptionPane.showMessageDialog(null, "El numero se encuentra fuera del rango");
+                } else {
+                    Bandera_2 = 6;
+                }
+            } catch (Exception e) {
+                Bandera_2 = 0;
+                JOptionPane.showMessageDialog(null, "La posicion debe ser un valor numerico");
+            }
+        }
+        Tienda_Actual = Tienda.get(Pos_Tienda);
+        Producto_Actual = Producto.get(Pos_Producto);
+        if (Tienda_Actual instanceof Tiendas && !(Producto_Actual instanceof Comida)) {
+            Tienda_Actual.getProduc().add(Producto_Actual);
+            JOptionPane.showMessageDialog(null, "Producto Agregado");
+        } else if (Tienda_Actual instanceof Locales_Comida && (Producto_Actual instanceof Comida)) {
+            Tienda_Actual.getProduc().add(Producto_Actual);
+            JOptionPane.showMessageDialog(null, "Producto Agregado");
+        } else if (Tienda_Actual instanceof quioscos) {
+            Producto_Actual.setPrecio(Producto_Actual.getPrecio() / 2);
+            Tienda_Actual.getProduc().add(Producto_Actual);
+            JOptionPane.showMessageDialog(null, "Producto Agregado");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se puede agregar este tipo de producto a este tipo de tienda");
+        }
+
     }
 
     public static void Modificar() {
@@ -574,11 +729,208 @@ public class Trabajo_Equipo {
     }
 
     public static void ModificarTiendas() {
+        String Nombre = "";
+        String Opcion = "";
+        int pos = 0;
+        int Bandera_3 = 0;
+        while (Bandera_3 == 0) {
+            try {
+                pos = Integer.parseInt(JOptionPane.showInputDialog("Tiendas disponibles" + Imprimir() + "\n Ingrese a cual desea Entrar.\n"));
+                if (pos < 0 || pos > Tienda.size() - 1) {
+                    JOptionPane.showMessageDialog(null, "El valor esta fuera de rango.");
+                    Bandera_3 = 0;
+                } else {
+                    Bandera_3 = 3;
+                }
+            } catch (Exception e) {
+                Bandera_3 = 0;
+                JOptionPane.showMessageDialog(null, "La posicion debe ser un valor numerico");
+            }
+        }
+        Tienda_Actual = Tienda.get(pos);
+    int Tipo=0;
+        if (Tienda_Actual instanceof Tiendas) {
+            Tipo=1;
+        }else if (Tienda_Actual instanceof Locales_Comida){
+            Tipo=2;
+        }else if (Tienda_Actual instanceof quioscos){
+            Tipo=3;
+        }
+        String[] Opciones = {"Tienda", "Quiosco", "Local Comida"};
+        int Bandera_1 = 0;
+        int Piso = 0;
+        while (Bandera_1 == 0) {
+            Opcion = (String) JOptionPane.showInputDialog(null,
+                    "Tipo de tienda que desea crear", //Mensaje
+                    "                                  Tipo_Tienda",//TITULO
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    Opciones,
+                    Opciones[0]);
+            if (Opcion == null) {
+                Bandera_1 = 0;
+                continue;
+            }
 
+        }
+        Nombre = JOptionPane.showInputDialog("el Nombre de la tienda");
+        while (Piso <= 0) {
+            try {
+                Piso = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el piso del edificio"));
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Los pisos son unicamente datos numericos");
+                Piso = 0;
+            }
+        }
+        switch (Tipo) {
+            case 1:
+                Tienda_Actual.setNombre(Nombre);
+                Tienda_Actual.setNum_Piso(Piso);
+                int Metros = 0;
+                while (Metros <= 0 || Metros > 18) {
+                    try {
+                        Metros = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la cantidad en metros del edificio"));
+                        if (Metros > 18) {
+                            JOptionPane.showMessageDialog(null, "Las tiendas no pueden tener mas de 18 Metros .");
+                        }
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Los pisos son unicamente datos numericos");
+                        Metros = 0;
+                    }
+                }
+                ((Tiendas) Tienda_Actual).setTamano(Metros);
+                //Tienda.add(Tienda_Actual);
+                nombre_Tiendas.add(Nombre);
+                break;
+            case 3:
+                String[] Nombres = new String[nombre_Tiendas.size()];
+                for (int i = 0; i < nombre_Tiendas.size(); i++) {
+                    Nombres[i] = nombre_Tiendas.get(i);
+                }
+                String Tiendita;
+                Tiendita = (String) JOptionPane.showInputDialog(null,
+                        "Nombre de las tiendas existentes", //Mensaje
+                        "                                  Nombre del quiosco",//TITULO
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        Nombres,
+                        Nombres[0]);
+                Tienda_Actual.setNombre(Nombre);
+                Tienda_Actual.setNum_Piso(Piso);
+                ((quioscos) Tienda_Actual).setNombre_Tienda(Tiendita);
+                /// Tienda.add(Q);
+                break;
+            case 2:
+                String Impresion = "Seleeccine el producto del dia: \n";
+                for (int i = 0; i < Producto.size(); i++) {
+                    Impresion += i + " )" + Producto.get(i);
+
+                }
+                int indice = 0;
+                while (indice < 0 || indice > Producto.size() - 1) {
+                    try {
+                        indice = Integer.parseInt(JOptionPane.showInputDialog(Impresion));
+                        if (indice < 0 || indice > Producto.size() - 1) {
+                            JOptionPane.showMessageDialog(null, "El numero se encuentra fuera de rango");
+                            continue;
+                        }
+                        if (Producto.get(indice) instanceof Comida) {
+                            int Descuento = 50;
+                            Producto.get(indice).setDescuento(Descuento);
+                            ((Locales_Comida) Tienda_Actual).setProducto_Dia((Comida) Producto.get(indice));
+                            JOptionPane.showMessageDialog(null, "Producto agregado con 50% de descuento.");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "El producto seleccionado no es alimenticio.");
+                            continue;
+                        }
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "El dato es incorrecto");
+                        indice = -6;
+                    }
+                }
+                Tienda_Actual.setNombre(Nombre);
+                Tienda_Actual.setNum_Piso(Piso);
+                Tienda.add(Tienda_Actual);
+
+                break;
+        }
+        JOptionPane.showMessageDialog(null, "Tienda Modificada ");
     }
 
     public static void ModificarProductos() {
-
+        int Bandera_2=0;
+        int pos1=0;
+          while (Bandera_2 == 0) {
+            try {
+                pos1 = Integer.parseInt(JOptionPane.showInputDialog("Productos Disponibles" + Imprimir() + "\n Ingrese que producto desea comprar.\n"));
+                if (pos1 < 0 || pos1 > Producto.size() - 1) {
+                    JOptionPane.showMessageDialog(null, "El valor esta fuera de rango.");
+                    Bandera_2 = 0;
+                } else {
+                    Bandera_2 = 3;
+                }
+            } catch (Exception e) {
+                Bandera_2 = 0;
+                JOptionPane.showMessageDialog(null, "La posicion debe ser un valor numerico");
+            }
+        }
+   
+        Producto_Actual = Producto.get(pos1);
+        int Tipo = 0;
+        if (Producto_Actual instanceof Comida) {
+            Tipo = 1;
+        } else if (Producto_Actual instanceof Juguetes) {
+            Tipo = 2;
+        } else if (Producto_Actual instanceof Ropa) {
+            Tipo = 3;
+        }
+            int descuento = 0;
+        double precio = 0.0;
+        String Deescripcion = JOptionPane.showInputDialog("Ingrese la descripcion del producto");
+        String Marca = JOptionPane.showInputDialog("Ingrese la marca del producto");
+        int Bandera_1 = 0;
+        while (Bandera_1 == 0) {
+            try {
+                descuento = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el descuento del producto:"));
+                precio = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el precio del producto:"));
+                Bandera_1 = 6;
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error en los datos, vuelva a ingresarlos");
+                Bandera_1 = 0;
+            }
+        }
+        String Opcion = "";
+        String[] Opciones = {"Comida", "Ropa", "Juguetes"};
+        switch (Tipo) {
+            case 1:
+                Comida C = new Comida();
+               Producto_Actual.setDescripcion(Deescripcion);
+               Producto_Actual.setDescuento(descuento);
+               Producto_Actual.setMarca(Marca);
+               // Producto.add(C);
+                break;
+            case 3:
+                Ropa R = new Ropa();
+               Producto_Actual.setDescripcion(Deescripcion);
+               Producto_Actual.setDescuento(descuento);
+               Producto_Actual.setMarca(Marca);
+                String Talla = JOptionPane.showInputDialog(null, "Ingrese la talla de la ropa");
+                String Genero = JOptionPane.showInputDialog(null, "Sexo de la ropa.");
+                ((Ropa)Producto_Actual).setGenero(Genero.charAt(0) + "");
+              ((Ropa)Producto_Actual).setTalla(Talla);
+                //Producto.add(R);
+                break;
+            case 2:
+                Juguetes J = new Juguetes();
+                 Producto_Actual.setDescripcion(Deescripcion);
+                Producto_Actual.setDescuento(descuento);
+                Producto_Actual.setMarca(Marca);
+                String Tipo1 = JOptionPane.showInputDialog(null, "Ingrese el tipo de jueguete");
+                 ((Juguetes)Producto_Actual).setTipo(Tipo1);
+                //Producto.add(J);
+                break;
+        }
+        JOptionPane.showMessageDialog(null, "Producto Modificado ");
     }
 
     public static void Eliminar() {
@@ -645,9 +997,12 @@ public class Trabajo_Equipo {
                     System.out.println("ENCPNTROP COINCIDENCIA");
                     Acceso = true;
                     PosicionU = i;
+
                 }
             }
         }
+        Cliente_Actual = (Clientes) Personas.get(PosicionU);
+        System.out.println("EL CLEINTE ACTUAL ES" + Cliente_Actual);
         return Acceso;
     }
 
@@ -701,6 +1056,17 @@ public class Trabajo_Equipo {
         for (int i = 0; i < Producto.size(); i++) {
             S += i + ")" + Producto.get(i).getPrecio() + " " + Producto.get(i).getDescripcion();
         }
+        return S;
+    }
+
+    public static String ImprimirF(Locales Local) {
+        String S = "";
+        // for (int i = 0; i < Tienda.size(); i++) {
+        S += "----------------------" + Local.getNombre() + "----------------------\n";
+        for (int j = 0; j < Local.getFacturados().size(); j++) {
+            S += j + " )" + Local.getFacturados().get(j).getDescripcion() + "      " + "Lps." + Local.getFacturados().get(j).getPrecio() + "\n";
+        }
+        //  }
         return S;
     }
 
