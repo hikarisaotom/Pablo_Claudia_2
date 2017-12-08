@@ -146,6 +146,7 @@ public class Trabajo_Equipo {
     public static void CrearProducto() {
         int descuento = 0;
         double precio = 0.0;
+        Productos P=new Productos();
         String Deescripcion = JOptionPane.showInputDialog("Ingrese la descripcion del producto");
         String Marca = JOptionPane.showInputDialog("Ingrese la marca del producto");
         int Bandera_1 = 0;
@@ -164,13 +165,17 @@ public class Trabajo_Equipo {
         switch (Opcion) {
             case "Comida":
                 Comida C = new Comida();
+                C.setPrecio(precio);
                 C.setDescripcion(Deescripcion);
                 C.setDescuento(descuento);
                 C.setMarca(Marca);
-                Producto.add(C);
+              //  Producto.add(C);
+                 Producto.add(C);
+                 P=C;
                 break;
             case "Ropa":
                 Ropa R = new Ropa();
+                    R.setPrecio(precio);
                 R.setDescripcion(Deescripcion);
                 R.setDescuento(descuento);
                 R.setMarca(Marca);
@@ -178,19 +183,27 @@ public class Trabajo_Equipo {
                 String Genero = JOptionPane.showInputDialog(null, "Sexo de la ropa.");
                 R.setGenero(Genero.charAt(0) + "");
                 R.setTalla(Talla);
-                Producto.add(R);
+               // Producto.add(R);
+                 Producto.add(R);
+                   P=R;
                 break;
             case "Juguetes":
                 Juguetes J = new Juguetes();
+                    J.setPrecio(precio);
                 J.setDescripcion(Deescripcion);
                 J.setDescuento(descuento);
                 J.setMarca(Marca);
                 String Tipo = JOptionPane.showInputDialog(null, "Ingrese el tipo de jueguete");
                 J.setTipo(Tipo);
+               // Producto.add(J);
                 Producto.add(J);
+                  P=J;
                 break;
         }
+       Producto.add(P);
+        System.out.println("LOS PRODUCTOS "+Producto);
         JOptionPane.showMessageDialog(null, "Producto agregado");
+      
     }
 
     public static void AgregarEmpleados() {
@@ -514,6 +527,7 @@ public class Trabajo_Equipo {
                 break;
             case "Crear Producto":
                 CrearProducto();
+                System.out.println("LOS PRODUCTIOS"+Producto);
                 break;
             case "Modificar":
                 Modificar();
@@ -851,7 +865,7 @@ public class Trabajo_Equipo {
                 Tienda_Actual.setNombre(Nombre);
                 Tienda_Actual.setNum_Piso(Piso);
                 Tienda.add(Tienda_Actual);
-
+                System.out.println("LAS TIENDAS");
                 break;
         }
         JOptionPane.showMessageDialog(null, "Tienda Modificada ");
@@ -862,7 +876,7 @@ public class Trabajo_Equipo {
         int pos1=0;
           while (Bandera_2 == 0) {
             try {
-                pos1 = Integer.parseInt(JOptionPane.showInputDialog("Productos Disponibles" + Imprimir() + "\n Ingrese que producto desea comprar.\n"));
+                pos1 = Integer.parseInt(JOptionPane.showInputDialog("Productos Disponibles" +ImprimirP() + "\n Ingrese que producto desea comprar.\n"));
                 if (pos1 < 0 || pos1 > Producto.size() - 1) {
                     JOptionPane.showMessageDialog(null, "El valor esta fuera de rango.");
                     Bandera_2 = 0;
